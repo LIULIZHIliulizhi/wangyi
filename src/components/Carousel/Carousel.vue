@@ -56,7 +56,7 @@
   width 100%
   .swiper-slide
     height 200px
-    clearFix()
+//    clearFix()
     img
       width 100%
       height 100%

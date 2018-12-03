@@ -9,25 +9,16 @@
           </span>
           <span class="search-text">搜索商品，共19604款好物</span>
         </div>
-        <input type="submit" value="登录" class="login">
+        <input type="submit" value="登录" class="login" @click="$router.replace('/login')">
       </div>
       <div class="header-bottom">
-        <ul class="header-nav">
-          <li class="nave-item active"><span>推荐</span></li>
-          <li class="nave-item"><span>居家</span></li>
-          <li class="nave-item"><span>鞋包配饰</span></li>
-          <li class="nave-item"><span>服装</span></li>
-          <li class="nave-item"><span>电器</span></li>
-          <li class="nave-item"><span>洗护</span></li>
-          <li class="nave-item"><span>饮食</span></li>
-          <li class="nave-item"><span>餐厨</span></li>
-          <li class="nave-item"><span>婴童</span></li>
-          <li class="nave-item"><span>文体</span></li>
-          <li class="nave-item"><span>特色区</span></li>
-          <li class="nave-item">
-            <span class="item icon">
-             <i class="iconfont icon-jiantou-copy-copy"></i>
-            </span>
+        <ul class="header-nav" ref="HeaderNav">
+          <li class="nave-item"
+              v-for="(item,index) in homeInfo.headCateList"
+              :class="{active:index===0}"
+              @click="bordShow(index)"
+          >
+            <span>{{item.name}}</span>
           </li>
         </ul>
       </div>
@@ -40,6 +31,7 @@
         <div class="poster"><span>48小时快速退货</span></div>
       </div>
       <Border/>
+      <div class="dinglei"></div>
       <div class="companyPay">
         <div class="companytitle">
           <span>品牌制造商直供</span>
@@ -106,6 +98,17 @@
       <div class="benefit"></div>
       <Border/>
       <SubjectSelecte/>
+      <Border/>
+      <ClassShop/>
+      <Border/>
+      <div class="foot">
+        <div class="download">下载APP</div>
+        <div class="computed">电脑版</div>
+        <div  class="foot-info">
+          <span>网易公司版权所有 © 1997-2018</span>
+          <span>食品经营许可证：JY13301080111719</span>
+        </div>
+      </div>
     </section>
   </div>
 </template>
@@ -117,6 +120,7 @@
   import BannerNew from '../../components/BannerNew/BannerNew.vue'
   import BannerHot from '../../components/BannerHot/BannerHot.vue'
   import TimerShop from'../../components/TimerShop/TimerShop.vue'
+  import ClassShop from '../../components/classShop/ClassShop.vue'
   import SubjectSelecte from '../../components/SubjectSelecte/SubjectSelecte.vue'
   export default {
     methods:{
@@ -125,8 +129,12 @@
           scrollX:true
         })
       },
-      borderShow(){
-        this.isSelect = true
+      bordShow(index){
+        const lis = this.$refs.HeaderNav.children
+        for(let i=0;i<lis.length;i++){
+          lis[i].className = 'nave-item';
+        }
+        lis[index].className = 'nave-item active'
       }
     },
     computed:{
@@ -134,20 +142,21 @@
     },
     mounted(){
       this.$store.dispatch('getHomeInfo')
-      this._initScroll()
+      this._initScroll();
     },
     components:{
       Carousel,
       BannerNew,
       BannerHot,
       TimerShop,
-      SubjectSelecte
+      SubjectSelecte,
+      ClassShop
       
     }
   }
 </script>
 
-<style lang="stylus" rel="stylesheet/stylus">
+<style lang="stylus" rel="stylesheet/stylus" scoped>
   @import '../../assets/stylus/mixins.styl'
   .home-header
     position fixed
@@ -231,6 +240,12 @@
         font-size 12px
         margin-left 35px
         line-height 40px
+  .dinglei
+    width 100%
+    height 100px
+    background-image url('./images/111.png')
+    background-size 100% 100%
+    background-repeat no-repeat
   .companyPay
     padding 0 10px
     .companytitle
@@ -357,4 +372,35 @@
     background-image  url('./images/fuli.jpg')
     background-size cover
     background-repeat no-repeat
+  .foot
+    width 100%
+    height 150px
+    background #414141
+    position relative
+    >div
+      width 100px
+      height 30px
+      border 1px solid #535353
+      color #E5E5E5
+      font-size 14px
+      text-align center
+      line-height 30px
+    .download
+      position absolute
+      left 60px
+      top 35px
+    .computed
+      position absolute
+      left 200px
+      top 35px
+    .foot-info
+      border none
+      position absolute
+      left 0
+      top 77px
+      display flex
+      font-size 12px
+      flex-direction column
+      width 100%
+      height 100px
 </style>

@@ -13,5 +13,11 @@ export default {
   },
   [RECIVE_BANNERIMG](state,bannerImg){
     state.bannerImg = bannerImg
+  },
+  [RECIVE_CLASSIFYINFO](state,{classifyInfo}){
+    state.classifyInfo = classifyInfo
+  },
+  [RECIVE_FABRICINFO](state,{fabricInfo}){
+    state.fabricInfo = fabricInfo
   }
 }

@@ -29,5 +29,21 @@ export default {
       commit(RECIVE_BANNERIMG,{bannerImg})
       typeof cb === 'function' && cb()
     }
+  },
+  async getClassifyInfo({commit,cb}){
+    const result = await requestClassifyInfo()
+    if(result.code===0){
+      const classifyInfo = result.data
+      commit(RECIVE_CLASSIFYINFO,{classifyInfo})
+      typeof cb === 'function' && cb()
+    }
+  },
+  async getFabriacInfo({commit,cb}){
+    const result = await requestFaricInfo()
+    if(result.code===0){
+      const fabricInfo = result.data
+      commit(RECIVE_FABRICINFO,{fabricInfo})
+      typeof cb === 'function' && cb()
+    }
   }
 }
