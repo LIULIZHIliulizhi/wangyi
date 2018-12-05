@@ -5,19 +5,24 @@ import {
   RECIVE_HOMEINFO,
   RECIVE_FABRICINFO,
   RECIVE_CLASSIFYINFO,
-  RECIVE_BANNERIMG
+  RECIVE_BANNERIMG,
+  GET_INDEX
 }from './mutations_type'
 export default {
-  [RECIVE_HOMEINFO](state,{homeInfo}){
+  [RECIVE_HOMEINFO](state, {homeInfo}){
     state.homeInfo = homeInfo
   },
-  [RECIVE_BANNERIMG](state,bannerImg){
+  [RECIVE_BANNERIMG](state, bannerImg){
     state.bannerImg = bannerImg
   },
-  [RECIVE_CLASSIFYINFO](state,{classifyInfo}){
+  [RECIVE_CLASSIFYINFO](state, {classifyInfo}){
     state.classifyInfo = classifyInfo
   },
-  [RECIVE_FABRICINFO](state,{fabricInfo}){
+  [RECIVE_FABRICINFO](state, {fabricInfo}){
     state.fabricInfo = fabricInfo
+  },
+  [GET_INDEX](state, {index}){
+    state.navIndex = index
   }
 }
+

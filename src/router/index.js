@@ -7,6 +7,7 @@ import Cart from'../pages/cart/Cart.vue';
 import Person from '../pages/person/Person.vue';
 import PhoneLogin from '../pages/person/PhoneLogin/PhoneLogin.vue'
 import EmailLogin from'../pages/person/EmailLogin/EmailLogin.vue'
+import NavData from '../pages/homePages/nadvData/NavData.vue'
 Vue.use(Router)
 
 export default new Router({
@@ -16,7 +17,15 @@ export default new Router({
       path:'/homepages',
       component:HomePages,
       meta: {
-        showFooter: true}
+        showFooter: true},
+      children:[
+        {
+          path:'/homepages/navData/:index',
+          component:NavData,
+          meta: {
+            showFooter: true},
+        }
+      ]
     },
     {
       path:'/classify',

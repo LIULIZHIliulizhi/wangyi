@@ -11,7 +11,8 @@ import{
   RECIVE_BANNERIMG,
   RECIVE_CLASSIFYINFO,
   RECIVE_FABRICINFO,
-  RECIVE_HOMEINFO
+  RECIVE_HOMEINFO,
+  GET_INDEX
 }from './mutations_type'
 export default {
   async getHomeInfo({commit}){
@@ -45,5 +46,8 @@ export default {
       commit(RECIVE_FABRICINFO,{fabricInfo})
       typeof cb === 'function' && cb()
     }
+  },
+  getIndex({commit},{index}){
+    commit(GET_INDEX,{index})
   }
 }

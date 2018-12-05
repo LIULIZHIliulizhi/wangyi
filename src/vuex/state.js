@@ -5,5 +5,7 @@ export default {
   bannerImg: [],
   homeInfo: {},
   fabricInfo: {},
-  classifyInfo: []
+  classifyInfo: [],
+  navIndex:0
+
 }

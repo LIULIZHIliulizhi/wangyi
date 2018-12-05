@@ -1,30 +1,30 @@
 <template>
     <footer class="footerNav">
-      <a href="JavaScript:;" class="footer_item" :class="{active: $route.path=== '/homePages'}" @click="$router.replace('/homePages')">
+      <a href="JavaScript:;" class="footer_item" :class="{active: $route.path.includes('homepages')|| $route.path.includes('homepages/')}" @click="path('/homepages')">
        <span class="item_icon">
         <i class="iconfont icon-shouye"></i>
       </span>
         <span class="item-text">首页</span>
       </a>
-      <a href="JavaScript:;"  class="footer_item" :class="{active: $route.path=== '/classify'}" @click="$router.replace('/classify')">
+      <a href="JavaScript:;"  class="footer_item" :class="{active: $route.path=== '/classify'}" @click="path('/classify')">
        <span class="item_icon">
         <i class="iconfont icon-fenlei"></i>
       </span>
         <span class="item-text">分类</span>
       </a>
-      <a href="JavaScript:;" class="footer_item":class="{active: $route.path=== '/fabric'}"  @click="$router.replace('/fabric')">
+      <a href="JavaScript:;" class="footer_item":class="{active: $route.path=== '/fabric'}"  @click="path('/fabric')">
        <span class="item_icon">
         <i class="iconfont icon-tubiaoCSban-"></i>
       </span>
         <span class="item-text">织物</span>
       </a>
-      <a href="JavaScript:;" class="footer_item" :class="{active: $route.path=== '/cart'}"  @click="$router.replace('/cart')">
+      <a href="JavaScript:;" class="footer_item" :class="{active: $route.path=== '/cart'}"  @click="path('/cart')">
        <span class="item_icon">
         <i class="iconfont icon-cart"></i>
       </span>
         <span class="item-text">购物车</span>
       </a>
-      <a href="JavaScript:;"class="footer_item" :class="{active: $route.path=== '/person'}"  @click="$router.replace('/person')">
+      <a href="JavaScript:;"class="footer_item" :class="{active: $route.path=== '/person'}"  @click="path('/person')">
        <span class="item_icon">
         <i class="iconfont icon-04geren"></i>
       </span>
@@ -36,7 +36,13 @@
 <script>
 
   export default {
-  
+    methods:{
+      path(path){
+        this.$router.replace(path)
+        this.$store.state.navIndex = null
+      }
+    }
+   
   }
 </script>
 

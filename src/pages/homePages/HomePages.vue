@@ -11,19 +11,11 @@
         </div>
         <input type="submit" value="登录" class="login" @click="$router.replace('/person')">
       </div>
-      <div class="header-bottom">
-        <ul class="header-nav" ref="HeaderNav">
-          <li class="nave-item"
-              v-for="(item,index) in homeInfo.headCateList"
-              :class="{active:index===0}"
-              @click="bordShow(index)"
-          >
-            <span>{{item.name}}</span>
-          </li>
-        </ul>
-      </div>
+      <HeaderNav ref="headerIndex"/>
     </header>
-    <section class="main">
+    <!--<router-link :to="`/homepages/navData/:${index}`"></router-link>-->
+    <router-view v-if="index != null"/>
+    <section class="main" v-else >
       <Carousel/>
       <div class="posterClass">
         <div class="poster"><span>网易自管商品</span></div>
@@ -72,7 +64,6 @@
       <Border/>
       <SubjectSelecte/>
       <Border/>
-      <ClassShop/>
       <Border/>
       <div class="foot">
         <div class="download">下载APP</div>
@@ -95,37 +86,13 @@
   import TimerShop from'../../components/TimerShop/TimerShop.vue'
   import ClassShop from '../../components/classShop/ClassShop.vue'
   import SubjectSelecte from '../../components/SubjectSelecte/SubjectSelecte.vue'
+  import HeaderNav from '../../components/headerNav/HeaderNav.vue'
+  import NavData from './nadvData/NavData.vue'
   export default {
-    methods:{
-      _initScroll(){
-        let scroll = new BScroll('.header-bottom',{
-          scrollX:true
-        })
-      },
-      bordShow(index){
-        const lis = this.$refs.HeaderNav.children
-        for(let i=0;i<lis.length;i++){
-          lis[i].className = 'nave-item';
-        }
-        lis[index].className = 'nave-item active'
-      },
-      
-    },
-    computed:{
-      ...mapState(['homeInfo','getNewTagList']),
-//      ...mapGetters(['getNewTagList']),
-      newTagList(){
-        if(this.homeInfo.tagList){
-          return this.homeInfo.tagList.filter((item,index)=>{
-            return index < 4
-          })
-        }
+    data(){
+      return{
+        index:null,
       }
-    },
-    mounted(){
-      this.$store.dispatch('getHomeInfo')
-      this._initScroll();
-      
     },
     components:{
       Carousel,
@@ -133,8 +100,36 @@
       BannerHot,
       TimerShop,
       SubjectSelecte,
-      ClassShop
+      ClassShop,
+      HeaderNav,
+      NavData
     },
+    methods:{
+      _initScroll(){
+        let scroll = new BScroll('.header-bottom',{
+          scrollX:true
+        })
+      },
+    },
+    computed:{
+      ...mapState(['homeInfo','getNewTagList','navIndex']),
+      newTagList(){
+        if(this.homeInfo.tagList){
+          return this.homeInfo.tagList.filter((item,index)=>{
+            return index < 4
+          })
+        }
+      },
+    },
+    mounted(){
+      this.$store.dispatch('getHomeInfo')
+    },
+    watch: {
+      navIndex(){
+        this.index = this.navIndex
+      }
+    }
+   
   }
 </script>
 
@@ -184,23 +179,6 @@
         border 1px solid firebrick
         border-radius 5px
         margin 4px 8px
-    .header-bottom
-      height 50px
-      background-color white
-      overflow hidden
-      .header-nav
-        float left
-        white-space nowrap
-        font-size 0
-        padding 0 10px
-        .nave-item
-          display inline-block
-          padding 10px 10px
-          font-size 14px
-          color #333333
-          &.active
-            color firebrick
-            border-bottom 3px solid firebrick
   .main
     padding-top 100px
     padding-bottom 50px
