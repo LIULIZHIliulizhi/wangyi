@@ -60,7 +60,12 @@
     img
       width 100%
       height 100%
-  .swiper-pagination-bullet:nth-children(n)
-    width 100px
-    
+  .swiper-pagination :nth-child(n)
+    width 30px
+    height 10px
+    border-radius 6px
+    background #fff
+    &.swiper-pagination-bullet-active
+      background #ccc
+
 </style>

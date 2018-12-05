@@ -7,7 +7,7 @@
     <div class="subjectwrap">
       <div class="subject" >
         <div class="subject-item" v-for="(topic,index) in homeInfo.topicList" :key="index" >
-          <img class="itemImg" :src="topic.itemPicUrl" alt="">
+          <img class="itemImg" v-lazy="topic.itemPicUrl" alt="">
           <div class="subject-text">
             <span class="text">{{topic.title}}</span>
             <span class="price">{{topic.priceInfo}}元起</span>

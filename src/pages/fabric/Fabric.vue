@@ -21,7 +21,7 @@
         <div class="swiper-wrapper">
           <div class="swiper-slide" v-for="(txt,index) in fabricInfo.banner" :key="index">
             <div class="swiper">
-              <img :src="txt.picUrl" alt="">
+              <img v-lazy="txt.picUrl" alt="">
               <div class="text">
                 <span class="text-title"> — {{txt.subTitle}} —</span>
                 <p>{{txt.title}}</p>
@@ -33,9 +33,9 @@
       </div>
       <div class="contentTab">
         <ul>
-          <li class="tab-item" v-for="(list,index) in fabricInfo.column" :key="index">
+          <li v-if="fabricInfo.column" class="tab-item" v-for="(list,index) in fabricInfo.column" :key="index">
             <div class="item">
-              <img :src="list.picUrl" alt="">
+              <img v-lazy="list.picUrl" alt="">
               <span class="count">{{list.articleCount}}</span>
             </div>
             <p>{{list.title}}</p>
@@ -49,13 +49,13 @@
       <Border/>
       <FarcicComp :recommend="fabricInfo.zhen" />
       <Border/>
-      <div class="look">
+      <div class="look"  v-if="fabricInfo.yxLook">
         <div class="look-top">严选LOOK</div>
-        <img :src="fabricInfo.yxLook.picUrl" alt="">
+        <img v-if="fabricInfo.yxLook" v-lazy="fabricInfo.yxLook.picUrl" alt="">
         <div class="look-content">
           <div class="look-id">
             <div class="avatar">
-              <img :src="fabricInfo.yxLook.avatar" alt="">
+              <img v-lazy="fabricInfo.yxLook.avatar" alt="">
             </div>
             <span>{{fabricInfo.yxLook.nickname}}</span>
           </div>

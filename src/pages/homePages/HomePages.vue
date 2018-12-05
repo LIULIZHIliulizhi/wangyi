@@ -9,7 +9,7 @@
           </span>
           <span class="search-text">搜索商品，共19604款好物</span>
         </div>
-        <input type="submit" value="登录" class="login" @click="$router.replace('/login')">
+        <input type="submit" value="登录" class="login" @click="$router.replace('/person')">
       </div>
       <div class="header-bottom">
         <ul class="header-nav" ref="HeaderNav">
@@ -38,40 +38,13 @@
           <span>  <i class="iconfont icon-duigouzhong"></i></span>
         </div>
         <ul class="shopList">
-          <li class="shop-item">
+          <li class="shop-item"  v-for="(item,index) in newTagList" :key="index">
             <a href="javascript:;">
-              <img src="./images/01.png" alt="">
+              <img :src="item.picUrl" alt="">
             </a>
             <div class="shop-title">
-              <span>Nine West制造商</span>
-              <span>￥199元起</span>
-            </div>
-          </li>
-          <li class="shop-item">
-            <a href="javascript:;">
-              <img src="./images/02.png" alt="">
-            </a>
-            <div class="shop-title">
-              <span>Ck制造商</span>
-              <span>￥25元起</span>
-            </div>
-          </li>
-          <li class="shop-item">
-            <a href="javascript:;">
-              <img src="./images/03.png" alt="">
-            </a>
-            <div class="shop-title">
-              <span>新丽秀制造商</span>
-              <span>￥49元起</span>
-            </div>
-          </li>
-          <li class="shop-item">
-            <a href="javascript:;"
-            ><img src="./images/04.png" alt="">
-            </a>
-            <div class="shop-title">
-              <span>birkenstock制造商</span>
-              <span>￥59.9元起</span>
+              <span>{{item.name}}</span>
+              <span>￥{{item.floorPrice}}元起</span>
             </div>
           </li>
         </ul>
@@ -115,7 +88,7 @@
 
 <script>
   import BScroll from 'better-scroll';
-  import {mapState} from 'vuex'
+  import {mapState,mapGetters} from 'vuex'
   import Carousel from '../../components/Carousel/Carousel.vue';
   import BannerNew from '../../components/BannerNew/BannerNew.vue'
   import BannerHot from '../../components/BannerHot/BannerHot.vue'
@@ -135,14 +108,24 @@
           lis[i].className = 'nave-item';
         }
         lis[index].className = 'nave-item active'
-      }
+      },
+      
     },
     computed:{
-      ...mapState(['homeInfo'])
+      ...mapState(['homeInfo','getNewTagList']),
+//      ...mapGetters(['getNewTagList']),
+      newTagList(){
+        if(this.homeInfo.tagList){
+          return this.homeInfo.tagList.filter((item,index)=>{
+            return index < 4
+          })
+        }
+      }
     },
     mounted(){
       this.$store.dispatch('getHomeInfo')
       this._initScroll();
+      
     },
     components:{
       Carousel,
@@ -151,8 +134,7 @@
       TimerShop,
       SubjectSelecte,
       ClassShop
-      
-    }
+    },
   }
 </script>
 
@@ -219,7 +201,6 @@
           &.active
             color firebrick
             border-bottom 3px solid firebrick
-
   .main
     padding-top 100px
     padding-bottom 50px

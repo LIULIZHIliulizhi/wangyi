@@ -7,7 +7,7 @@
          <span>:</span>
          <span :minut="minut">{{minut}}</span>
          <span>:</span>
-         <span :second="second">{{second}}</span>
+         <span :second="second">{{second<10?'0'+second:second}}</span>
        </div>
        <div class="more" >
          <span>更多</span>
@@ -50,15 +50,33 @@
   export default {
     data(){
       return{
-        hour:0,
-        minut:0,
-        second:0
+        hour:11,
+        minut:30,
+        second:59
       }
     },
     methods:{
-    
+      init(){
+         this.timer = setInterval(()=>{
+          this.second--
+          if(this.second=== 0){
+            this.minut--
+            this.second = 59
+            if(this.minut===0){
+              this.hour--
+              this.minut = 59
+            }if(this.houer ==0){
+              this.minut = 59
+              if(this.minut===0){
+                clearInterval(this.timer)
+              }
+            }
+          }
+        },1000)
+      }
     },
     mounted(){
+      this.init()
     }
   }
 </script>

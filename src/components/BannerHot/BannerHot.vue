@@ -2,7 +2,7 @@
   <div class="wrapHot">
     <div class="hot" >
       <div class="hot-item" v-for="(popularItem,index) in homeInfo.popularItemList" :key="index">
-        <img :src="popularItem.scenePicUrl" alt="">
+        <img v-lazy="popularItem.scenePicUrl" alt="">
         <p class="ellipsis">{{popularItem.simpleDesc}}</p>
         <p class="hotAttr ellipsis">{{popularItem.name}}</p>
         <span class="price">￥{{popularItem.retailPrice}}</span>

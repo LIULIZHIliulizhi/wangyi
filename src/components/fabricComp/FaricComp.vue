@@ -1,26 +1,26 @@
 <template>
   <div class="introduce">
-    <div class="recomments">{{recommend.name}}</div>
+    <div class="recomments">{{res}}</div>
     <div>
       <a href="javascript:;" class="introduce-main">
-        <div class="introduce-img">
-          <img :src="recommend.Item[0].picUrl" alt="">
+        <div class="introduce-img" v-if="recommend">
+          <img v-if="recommend" v-lazy="item[0].picUrl" alt="">
         </div>
-        <div class="introduce-content">
-          <div class="content-top">
-            <p>{{recommend.Item[0].title}}</p>
-            <span>{{recommend.Item[0].priceInfo}}元起</span>
+        <div class="introduce-content" v-if="item[0]">
+          <div class="content-top" >
+            <p>{{item[0].title}}</p>
+            <span>{{item[0].priceInfo}}元起</span>
           </div>
-          <span class="price">{{recommend.Item[0].subTitle}}</span>
+          <span class="price">{{item[0].subTitle}}</span>
         </div>
       </a>
-      <div class="introduce-list" v-for="(obj,index) in recommend.Item" :key="index" v-if="index != 0">
+      <div class="introduce-list" v-for="(obj,index) in item" :key="index" v-if="index != 0 && item">
         <div class="list-left">
           <span class="left-title">{{obj.title}}</span>
           <span class=" text ellipsis">{{obj.subTitle}}</span>
         </div>
         <div class="list-right">
-          <img class="right-img" :src="obj.picUrl" alt="">
+          <img class="right-img" v-lazy="obj.picUrl" alt="">
           <div class="right-title">{{obj.typeName}}</div>
         </div>
   
@@ -32,17 +32,24 @@
 <script>
 import {mapState}from 'vuex'
   export default {
+  data(){
+    return {
+      res:{},
+      item:[]
+    }
+  },
     props:{
       recommend:Object
     },
     mounted(){
       if(!this.recommend){
-        return
+        return this.recommend
       }
     },
     watch:{
       recommend(){
-        return this.recommend
+        this.res = this.recommend.name ;
+        this.item = this.recommend.Item
       }
     }
   }

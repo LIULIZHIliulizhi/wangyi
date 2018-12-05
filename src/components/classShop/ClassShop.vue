@@ -5,7 +5,7 @@
       <ul>
         <li  v-for="(item,index) in cate.itemList" :key="index">
           <div class="Img">
-            <img :src="item.listPicUrl" alt="">
+            <img v-lazy="item.listPicUrl" alt="">
           </div>
           <div class="decripte">{{item.simpleDesc}}</div>
           <p class="text ellipsis">{{item.name}}</p>

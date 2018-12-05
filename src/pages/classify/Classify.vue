@@ -25,7 +25,7 @@
                :key="index"
                v-if="index === rightIndex">
             <div class="Img">
-              <img :src="category.wapBannerUrl" alt="">
+              <img v-lazy="category.wapBannerUrl" alt="">
             </div>
             <div class="title">
               <div class="left"></div>
@@ -34,7 +34,7 @@
             </div>
             <ul class="content-list">
               <li class="list-item" v-for="(subCate,index) in category.subCateList" :key="index">
-                <img :src="subCate.bannerUrl|| subCate.wapBannerUrl" alt="">
+                <img v-lazy="subCate.bannerUrl|| subCate.wapBannerUrl" alt="">
                 <p>{{subCate.name}}</p>
               </li>
             </ul>
@@ -136,7 +136,7 @@ header
     /*background blanchedalmond*/
     .contentWrap
       width 100%
-      height 100%
+      height 800px
       .Img
         width 100%
         height 100px

@@ -7,7 +7,7 @@
     </header>
     <ul>
       <li class="card" v-for="(item,index) in fabricInfo.findMore " >
-        <img :src="item.itemPicUrl" alt="">
+        <img v-lazy="item.itemPicUrl" alt="">
         <p>{{item.title}}</p>
       </li>
     </ul>

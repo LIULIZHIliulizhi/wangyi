@@ -2,7 +2,7 @@
   <div class="wrapNew">
     <div class="new" >
       <div class="new-item" v-for="(newItem,index) in homeInfo.newItemList" :key="index">
-        <img :src="newItem.scenePicUrl" alt="">
+        <img v-lazy="newItem.scenePicUrl" alt="">
         <p class="ellipsis">{{newItem.simpleDesc}}</p>
         <p class="newAttr ellipsis">{{newItem.name}}</p>
         <span class="price">￥{{newItem.retailPrice}}</span>
